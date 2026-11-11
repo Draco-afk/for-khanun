@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ถึงน้องขนุน</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Anuphan:wght@300;400;600&display=swap">
+<style>
+/* Layout: one narrow love letter read top to bottom at night under fairy lights —
+   name + bouquet, the card, tilted snapshots, our songs, her reply. Single dark look by choice. */
+:root {
+  color-scheme: dark;
+  --night: #131a36;        /* her navy cardigan */
+  --night-2: #1c2550;
+  --knit: #f6efe0;         /* his ivory sweater */
+  --knit-dim: #c9c3d6;
+  --khanun: #f5c84a;       /* jackfruit gold */
+  --petal: #f4a6b8;
+  --petal-deep: #e17c97;
+  --leaf: #7fb48a;
+  --ink: #2a2440;          /* text on the ivory card */
+  --display: "Charmonman", "Leelawadee UI", "Thonburi", cursive;
+  --body: "Anuphan", "Leelawadee UI", "Thonburi", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+img { max-width: 100%; }
+body { margin: 0; }
+.player { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 14px; background: #0b1024; box-shadow: 0 14px 32px rgba(0,0,0,.4); }
+html { scroll-behavior: smooth; }
+body {
+  background:
+    radial-gradient(circle at 12% 6%, rgba(245,200,74,.20) 0 3px, transparent 26px),
+    radial-gradient(circle at 78% 3%, rgba(245,200,74,.16) 0 3px, transparent 30px),
+    radial-gradient(circle at 46% 10%, rgba(245,200,74,.14) 0 2px, transparent 22px),
+    radial-gradient(circle at 92% 14%, rgba(244,166,184,.14) 0 2px, transparent 24px),
+    radial-gradient(circle at 28% 16%, rgba(245,200,74,.10) 0 2px, transparent 20px),
+    linear-gradient(180deg, var(--night-2), var(--night) 38rem);
+  background-color: var(--night);
+  background-repeat: no-repeat;
+  color: var(--knit);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.75;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 4rem;
+}
+#petals { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+main { max-width: 34rem; margin: 0 auto; display: flex; flex-direction: column; gap: 4.5rem; position: relative; }
+h1, h2 { font-family: var(--display); font-weight: 700; text-wrap: balance; margin: 0; line-height: 1.5; }
+h2 { font-size: 2rem; color: var(--khanun); }
+p { margin: 0; }
+section { display: flex; flex-direction: column; gap: 1.25rem; }
+.hint { color: var(--knit-dim); font-size: .95rem; }
+
+/* hero */
+.hero { text-align: center; padding-top: 3.5rem; gap: .5rem; }
+.hero .to { letter-spacing: .12em; color: var(--knit-dim); font-size: .95rem; }
+.hero h1 { font-size: clamp(3.4rem, 17vw, 5.6rem); color: var(--khanun); line-height: 1.35; }
+.hero .say { font-family: var(--display); font-size: 1.6rem; }
+#bouquet { width: 100%; max-width: 26rem; height: auto; margin: .5rem auto 0; display: block; overflow: visible; }
+.bloom { transform-box: fill-box; transform-origin: center; animation: bloom 1.6s cubic-bezier(.2,.9,.3,1.2) both; }
+.sway { transform-box: fill-box; transform-origin: bottom center; animation: sway 6s ease-in-out infinite alternate; }
+@keyframes bloom { from { transform: scale(.55) rotate(-25deg); } to { transform: scale(1) rotate(0); } }
+@keyframes sway { from { transform: rotate(-1.6deg); } to { transform: rotate(1.6deg); } }
+
+/* card */
+.card { perspective: 1200px; }
+.cover, .letter {
+  background: var(--knit); color: var(--ink);
+  border-radius: 6px; box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.cover {
+  font: inherit; border: 0; width: 100%; cursor: pointer;
+  padding: 2.5rem 1.5rem; display: flex; flex-direction: column; align-items: center; gap: .6rem;
+  background-image: repeating-linear-gradient(0deg, transparent 0 13px, rgba(42,36,64,.05) 13px 14px); /* knit ribs */
+}
+.cover .seal {
+  width: 4rem; height: 4rem; border-radius: 50%; background: var(--petal-deep); color: var(--knit);
+  display: grid; place-items: center; font-family: var(--display); font-size: 1.7rem; font-weight: 700;
+  box-shadow: inset 0 0 0 4px rgba(255,255,255,.25);
+}
+.cover .name { font-family: var(--display); font-size: 1.9rem; font-weight: 700; color: var(--ink); }
+.cover .tap { font-size: .95rem; color: #6b6480; }
+.letter { padding: 2rem 1.5rem; font-size: 1.05rem; animation: unfold .7s ease both; transform-origin: top center; }
+.letter p + p { margin-top: 1rem; }
+.letter .hello, .letter .sign { font-family: var(--display); font-size: 1.6rem; font-weight: 700; color: var(--petal-deep); }
+.letter .sign { text-align: right; }
+@keyframes unfold { from { transform: rotateX(-35deg); opacity: .4; } to { transform: none; opacity: 1; } }
+
+/* photos */
+.snaps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 1rem; }
+.snap { margin: 0; background: var(--knit); padding: .5rem .5rem .6rem; border-radius: 3px; box-shadow: 0 10px 24px rgba(0,0,0,.35); transform: rotate(var(--r, 0deg)); }
+.snap:nth-child(odd) { --r: -2deg; } .snap:nth-child(even) { --r: 1.8deg; } .snap:nth-child(3n) { --r: 1deg; }
+.snap img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 2px; }
+.snap figcaption { color: var(--ink); font-family: var(--display); font-size: 1.05rem; text-align: center; padding-top: .35rem; line-height: 1.5; }
+.snap.wide { grid-column: 1 / -1; justify-self: center; width: min(100%, 17rem); --r: -1deg; }
+
+/* songs */
+.songs { display: flex; flex-direction: column; gap: .75rem; }
+.song {
+  display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--knit);
+  padding: .9rem 1rem; border: 1px solid rgba(246,239,224,.22); border-radius: 999px;
+}
+.song:hover, .song:focus-visible { border-color: var(--khanun); background: rgba(245,200,74,.08); }
+.disc { flex: none; width: 2.6rem; height: 2.6rem; border-radius: 50%;
+  background: radial-gradient(circle, var(--khanun) 0 18%, var(--night) 19% 26%, #0b1024 27% 100%);
+  box-shadow: 0 0 0 1px rgba(246,239,224,.25); animation: spin 9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.song span { min-width: 0; display: flex; flex-direction: column; line-height: 1.4; }
+.song b { font-weight: 600; } .song small { color: var(--knit-dim); font-size: .85rem; }
+
+/* reply */
+.ask { font-family: var(--display); font-size: 2.4rem; font-weight: 700; text-align: center; }
+.choices { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; min-height: 3.5rem; position: relative; }
+button.pill {
+  font: inherit; cursor: pointer; border-radius: 999px; padding: .65rem 1.4rem;
+  border: 1px solid rgba(246,239,224,.35); background: transparent; color: var(--knit);
+  transition: transform .25s ease, background .2s;
+}
+button.pill[aria-pressed="true"], button.go { background: var(--khanun); color: var(--night); border-color: var(--khanun); font-weight: 600; }
+textarea {
+  font: inherit; width: 100%; min-height: 7rem; resize: vertical; padding: .9rem 1rem;
+  background: rgba(246,239,224,.07); color: var(--knit); border: 1px solid rgba(246,239,224,.3); border-radius: 12px;
+}
+label { color: var(--knit-dim); font-size: .95rem; }
+.field { display: flex; flex-direction: column; gap: .4rem; }
+#status { text-align: center; color: var(--khanun); min-height: 1.75em; }
+:focus-visible { outline: 2px solid var(--khanun); outline-offset: 3px; }
+footer { text-align: center; font-family: var(--display); font-size: 1.3rem; color: var(--knit-dim); }
+@media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<canvas id="petals" aria-hidden="true"></canvas>
+<main>
+  <section class="hero">
+    <p class="to">จากพี่ ถึง</p>
+    <h1>น้องขนุน</h1>
+    <p class="say">พี่มีดอกไม้กับเรื่องจะบอก</p>
+    <svg id="bouquet" viewBox="0 0 400 300" role="img" aria-label="ช่อดอกไม้สีชมพูและเหลืองทอง"></svg>
+  </section>
+
+  <section class="card" aria-labelledby="card-h">
+    <h2 id="card-h">การ์ดจากพี่</h2>
+    <button class="cover" id="cover" type="button" aria-expanded="false" aria-controls="letter">
+      <span class="seal">รัก</span>
+      <span class="name">ถึง น้องขนุน</span>
+      <span class="tap">แตะเพื่อเปิดการ์ด</span>
+    </button>
+    <div class="letter" id="letter" hidden></div>
+  </section>
+
+  <section aria-labelledby="snap-h">
+    <h2 id="snap-h">รูปที่พี่ชอบเปิดดู</h2>
+    <div class="snaps" id="snaps"></div>
+  </section>
+
+  <section aria-labelledby="song-h">
+    <h2 id="song-h">เพลงของ Pause ที่ฟังแล้วคิดถึงน้อง</h2>
+    <p class="hint">กดเล่นเพลง รักเธอทั้งหมดของหัวใจ แล้วฟังไปด้วย อ่านการ์ดไปด้วยนะ</p>
+    <iframe class="player" title="Pause - รักเธอทั้งหมดของหัวใจ" src="https://www.youtube-nocookie.com/embed/r1L_MzeuEjk?rel=0&amp;playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <p class="hint">เพลงอื่นของ Pause เปิดฟังต่อบน YouTube ได้</p>
+    <div class="songs" id="songs"></div>
+  </section>
+
+  <section aria-labelledby="ask-h">
+    <h2 id="ask-h">ตาน้องตอบพี่บ้าง</h2>
+    <p class="ask">รักพี่ไหม</p>
+    <div class="choices" id="choices">
+      <button class="pill" type="button" data-a="รักสิ" aria-pressed="false">รักสิ</button>
+      <button class="pill" type="button" data-a="รักมากกกก" aria-pressed="false">รักมากกกก</button>
+      <button class="pill" type="button" id="nope">ไม่รัก</button>
+    </div>
+    <div class="field">
+      <label for="msg">อยากบอกอะไรพี่ พิมพ์ตรงนี้ได้เลย</label>
+      <textarea id="msg" placeholder="เช่น คิดถึงพี่เหมือนกัน"></textarea>
+    </div>
+    <button class="pill go" type="button" id="copy">คัดลอกคำตอบ แล้วไปวางส่งให้พี่ในแชต</button>
+    <p id="status" role="status"></p>
+    <div class="field" id="fallback" hidden>
+      <label for="out">กดค้างที่ข้อความนี้เพื่อคัดลอกเอง</label>
+      <textarea id="out" readonly></textarea>
+    </div>
+  </section>
+
+  <footer>รักน้องขนุนที่สุดเลย — พี่</footer>
+</main>
+
+<script>
+/* ====== แก้ข้อความในการ์ดได้ที่นี่ (หนึ่งบรรทัด = หนึ่งย่อหน้า) ====== */
+const LETTER = [
+  "ขอบคุณที่เอาหัวมาพิงไหล่พี่ในวันนั้นนะ พี่นั่งนิ่งมาก เพราะกลัวน้องจะขยับออก",
+  "พี่ชอบเวลาน้องยิ้มจนตาหยี ชอบเวลาน้องทำหน้าตลกใส่กล้อง และชอบที่สุดคือตอนน้องพิมพ์มาว่า คิดถึงพี่",
+  "ขอให้น้องกินอิ่ม นอนหลับ และมีเรื่องให้ยิ้มทุกวัน วันไหนเหนื่อย ไหล่ข้างนี้ว่างให้น้องเสมอ",
+  "พี่รักน้องขนุนนะ รักทุกวัน ไม่ใช่แค่วันนี้"
+];
+const SIGN = "จากพี่";
+/* ================================================================ */
+
+const PHOTOS = [
+  ["img/p3.jpg", "ไหล่ข้างนี้มีคนจองแล้ว"],
+  ["img/p5.jpg", "ขยิบตาทีเดียว ใจพี่ละลาย"],
+  ["img/p2.jpg", "หมีสองตัว"],
+  ["img/p6.jpg", "หมีสองตัว ภาคสอง"],
+  ["img/p1.jpg", "แอบมองพี่อยู่ใช่ไหม"],
+  ["img/p7.jpg", "ข้อความที่พี่อ่านซ้ำบ่อยที่สุด"],
+  ["img/p4.jpg", "เงาของเราสองคน", "wide"]
+];
+const SONGS = [
+  ["ดาว", "Pause ดาว"],
+  ["รวมเพลงของ Pause", "Pause วง รวมเพลง"]
+];
+const $ = id => document.getElementById(id);
+const el = (tag, props, kids) => { const e = Object.assign(document.createElement(tag), props || {}); (kids || []).forEach(k => e.append(k)); return e; };
+const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* card */
+const letter = $("letter");
+letter.append(el("p", { className: "hello", textContent: "ถึง น้องขนุนของพี่" }));
+LETTER.forEach(t => letter.append(el("p", { textContent: t })));
+letter.append(el("p", { className: "sign", textContent: SIGN }));
+$("cover").addEventListener("click", () => {
+  const open = letter.hidden;
+  letter.hidden = !open;
+  $("cover").setAttribute("aria-expanded", String(open));
+  $("cover").querySelector(".tap").textContent = open ? "แตะเพื่อพับการ์ด" : "แตะเพื่อเปิดการ์ด";
+  if (open) burst(40);
+});
+
+/* photos */
+PHOTOS.forEach(([src, cap, cls]) => $("snaps").append(
+  el("figure", { className: "snap" + (cls ? " " + cls : "") }, [
+    el("img", { src, alt: cap, loading: "lazy" }), el("figcaption", { textContent: cap })
+  ])));
+
+/* songs */
+SONGS.forEach(([name, q]) => $("songs").append(
+  el("a", { className: "song", target: "_blank", rel: "noopener", href: "https://www.youtube.com/results?search_query=" + encodeURIComponent(q) }, [
+    el("i", { className: "disc" }),
+    el("span", {}, [el("b", { textContent: name }), el("small", { textContent: "Pause · เปิดฟังบน YouTube" })])
+  ])));
+
+/* bouquet */
+(function () {
+  const NS = "http://www.w3.org/2000/svg", svg = $("bouquet");
+  const mk = (t, a, parent) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); (parent || svg).append(n); return n; };
+  const css = getComputedStyle(document.documentElement), c = v => css.getPropertyValue(v).trim();
+  const blooms = [ // x, y, size, colour, petals
+    [200, 70, 34, c("--petal"), 8], [128, 104, 28, c("--khanun"), 7], [272, 100, 29, c("--khanun"), 7],
+    [78, 150, 23, c("--petal-deep"), 6], [322, 146, 24, c("--petal-deep"), 6],
+    [164, 142, 22, c("--knit"), 6], [238, 146, 22, c("--knit"), 6]
+  ];
+  const all = mk("g", { class: "sway" });
+  blooms.forEach(([x, y]) => mk("path", { d: `M200 292 Q ${(x + 200) / 2} ${y + 90} ${x} ${y}`, stroke: c("--leaf"), "stroke-width": 3, fill: "none", "stroke-linecap": "round" }, all));
+  [[150, 215, -35], [250, 215, 35], [176, 250, -20], [224, 250, 20]].forEach(([x, y, r]) =>
+    mk("ellipse", { cx: x, cy: y, rx: 20, ry: 8, fill: c("--leaf"), transform: `rotate(${r} ${x} ${y})` }, all));
+  blooms.forEach(([x, y, s, col, n], i) => {
+    const g = mk("g", { class: "bloom", style: `animation-delay:${i * 0.14}s` }, all);
+    for (let p = 0; p < n; p++) mk("ellipse", { cx: x, cy: y - s * 0.62, rx: s * 0.36, ry: s * 0.62, fill: col, opacity: .92, transform: `rotate(${p * 360 / n} ${x} ${y})` }, g);
+    mk("circle", { cx: x, cy: y, r: s * 0.3, fill: col === c("--khanun") ? c("--petal-deep") : c("--khanun") }, g);
+  });
+  mk("path", { d: "M176 268 Q200 256 224 268 L216 296 L184 296 Z", fill: c("--petal-deep") }, all); // ribbon
+})();
+
+/* falling petals */
+const cv = $("petals"), ctx = cv.getContext("2d"); let W = 0, H = 0, bits = [];
+function size() { const d = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
+function petal(top) { return { x: Math.random() * W, y: top ? -20 : Math.random() * H, s: 5 + Math.random() * 6, v: .35 + Math.random() * .7, a: Math.random() * 6.3, w: .01 + Math.random() * .02, gold: Math.random() < .3 }; }
+function burst(n) { if (calm) return; for (let i = 0; i < n; i++) bits.push(Object.assign(petal(true), { y: -Math.random() * 200, extra: true })); }
+function tick() {
+  ctx.clearRect(0, 0, W, H);
+  bits = bits.filter(b => !(b.extra && b.y > H + 20));
+  for (const b of bits) {
+    b.y += b.v; b.a += b.w; b.x += Math.sin(b.a) * .6;
+    if (b.y > H + 20 && !b.extra) Object.assign(b, petal(true));
+    ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.a);
+    ctx.fillStyle = b.gold ? "rgba(245,200,74,.55)" : "rgba(244,166,184,.6)";
+    ctx.beginPath(); ctx.ellipse(0, 0, b.s, b.s * .55, 0, 0, 6.3); ctx.fill(); ctx.restore();
+  }
+  requestAnimationFrame(tick);
+}
+if (!calm) { size(); addEventListener("resize", size); bits = Array.from({ length: 22 }, () => petal(false)); tick(); }
+
+/* reply */
+let answer = "";
+const tease = ["กดผิดใช่ไหม", "ลองใหม่อีกทีนะ", "ปุ่มนี้เสีย", "พี่ไม่เชื่อหรอก"]; let t = 0;
+document.querySelectorAll("#choices [data-a]").forEach(b => b.addEventListener("click", () => {
+  answer = b.dataset.a;
+  document.querySelectorAll("#choices [data-a]").forEach(o => o.setAttribute("aria-pressed", String(o === b)));
+  $("status").textContent = "พี่ก็รักน้องขนุนเหมือนกัน";
+  burst(50);
+}));
+const nope = $("nope");
+function dodge() {
+  nope.textContent = tease[t++ % tease.length];
+  if (!calm) nope.style.transform = `translate(${(Math.random() - .5) * 120}px, ${(Math.random() - .5) * 50}px) scale(${Math.max(.6, 1 - t * .08)})`;
+}
+nope.addEventListener("pointerenter", dodge); nope.addEventListener("click", dodge);
+
+$("copy").addEventListener("click", async () => {
+  const msg = $("msg").value.trim();
+  if (!answer && !msg) { $("status").textContent = "เลือกคำตอบหรือพิมพ์อะไรสักหน่อยก่อนนะ"; return; }
+  const text = ["ถึงพี่", answer ? "ตอบว่า: " + answer : "", msg, "— น้องขนุน"].filter(Boolean).join("\n");
+  try {
+    await navigator.clipboard.writeText(text);
+    $("status").textContent = "คัดลอกแล้ว ไปวางส่งให้พี่ในแชตได้เลย";
+    $("fallback").hidden = true;
+  } catch (e) {
+    $("out").value = text; $("fallback").hidden = false; $("out").focus(); $("out").select();
+    $("status").textContent = "คัดลอกอัตโนมัติไม่ได้ ข้อความอยู่ด้านล่างแล้ว";
+  }
+});
+</script>
+
+</body>
+</html>
