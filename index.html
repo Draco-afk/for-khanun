@@ -47,7 +47,7 @@ body {
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 0 4rem;
 }
-#petals { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+#petals { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 main { max-width: 34rem; margin: 0 auto; display: flex; flex-direction: column; gap: 4.5rem; position: relative; z-index: 1; }
 h1, h2 { font-family: var(--display); font-weight: 700; text-wrap: balance; margin: 0; line-height: 1.5; }
 h2 { font-size: 2rem; color: var(--khanun); }
@@ -130,6 +130,22 @@ label { color: var(--knit-dim); font-size: .95rem; }
 #status { text-align: center; color: var(--khanun); min-height: 1.75em; }
 :focus-visible { outline: 2px solid var(--khanun); outline-offset: 3px; }
 footer { text-align: center; font-family: var(--display); font-size: 1.3rem; color: var(--knit-dim); }
+/* ---- phone ---- */
+html { -webkit-text-size-adjust: 100%; }
+@media (max-width: 480px) {
+  main { gap: 3.5rem; }
+  .hero { padding-top: 2.25rem; }
+  h2 { font-size: 1.8rem; }
+  .snaps { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; justify-items: center; }
+  .snap, .snap.wide { width: min(100%, 19.5rem); grid-column: auto; padding: .6rem .6rem .7rem; }
+  .snap figcaption { font-size: 1.3rem; padding-top: .5rem; }
+  .letter { padding: 1.6rem 1.2rem; }
+  label, .hint { font-size: 1rem; }
+  .song small { font-size: .9rem; }
+  .ask { font-size: 2.2rem; }
+  button.pill { min-height: 3rem; }
+  #copy { width: 100%; }
+}
 /* ---- animation layer ---- */
 .lights { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 .lights i { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--khanun);
@@ -302,7 +318,7 @@ SONGS.forEach(([name, q]) => $("songs").append(
 /* falling petals */
 const cv = $("petals"), ctx = cv.getContext("2d"); let W = 0, H = 0, bits = [];
 function size() { const d = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
-function petal(top) { return { x: Math.random() * W, y: top ? -20 : Math.random() * H, s: 5 + Math.random() * 6, v: .35 + Math.random() * .7, a: Math.random() * 6.3, w: .01 + Math.random() * .02, gold: Math.random() < .3 }; }
+function petal(top) { return { x: Math.random() * W, y: top ? -20 : Math.random() * H, s: (5 + Math.random() * 6) * (W < 500 ? .65 : 1), v: .35 + Math.random() * .7, a: Math.random() * 6.3, w: .01 + Math.random() * .02, gold: Math.random() < .3 }; }
 function burst(n) { if (calm) return; for (let i = 0; i < n; i++) bits.push(Object.assign(petal(true), { y: -Math.random() * 200, extra: true })); }
 function tick() {
   ctx.clearRect(0, 0, W, H);
@@ -316,12 +332,12 @@ function tick() {
   }
   requestAnimationFrame(tick);
 }
-if (!calm) { size(); addEventListener("resize", size); bits = Array.from({ length: 22 }, () => petal(false)); tick(); }
+if (!calm) { size(); addEventListener("resize", size); bits = Array.from({ length: innerWidth < 500 ? 12 : 22 }, () => petal(false)); tick(); }
 
 /* twinkling fairy lights, tap hearts, scroll reveal */
 if (!calm) {
   const lights = el("div", { className: "lights" }); lights.setAttribute("aria-hidden", "true");
-  for (let i = 0; i < 28; i++) {
+  for (let i = 0; i < (innerWidth < 500 ? 16 : 28); i++) {
     const d = el("i", { className: Math.random() < .3 ? "pink" : "" });
     d.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;--d:${2 + Math.random() * 3}s;--t:${-Math.random() * 5}s;scale:${.5 + Math.random()}`;
     lights.append(d);
